@@ -1,11 +1,8 @@
 require('dotenv').config();
-
-var path = require('path');
+const path = require('path');
 const webpack = require('webpack');
 
 const isDev = process.env.APP_ENV === 'development';
-
-// TODO: add color npm package
 
 console.log(process.env.APP_ENV);
 console.log(isDev);
