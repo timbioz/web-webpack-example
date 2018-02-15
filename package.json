@@ -5,6 +5,7 @@
   "license": "MIT",
   "devDependencies": {
     "babel-loader": "^7.1.2",
+    "dotenv": "^5.0.0",
     "webpack": "^3.11.0"
   },
   "dependencies": {
