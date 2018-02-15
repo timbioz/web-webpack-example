@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "devDependencies": {
+    "babel-loader": "^7.1.2",
     "webpack": "^3.11.0"
   },
   "dependencies": {
