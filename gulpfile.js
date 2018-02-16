@@ -4,22 +4,22 @@ var reload = browserSync.reload;
 var webpack = require("webpack-stream");
 
 // Static server
-gulp.task("browser-sync", function() {
+gulp.task("browser-sync-dev", function() {
     browserSync.init({
         server: {
-            baseDir: "./dist",
+            baseDir: "./build",
             notify: false
         }
     });
 
-    gulp.watch("dist/**/*").on("change", reload);
+    gulp.watch("build/**/*").on("change", reload);
 });
 
 gulp.task("webpack", function() {
     return gulp
         .src("src/js/index.js")
         .pipe(webpack(require("./webpack.config.js")))
-        .pipe(gulp.dest("dist/"));
+        .pipe(gulp.dest("build/"));
 });
 
 

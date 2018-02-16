@@ -5,13 +5,11 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 const isDev = process.env.APP_ENV === "development";
 
-// TODO: resolve Live reload browser feature
-
 console.log(process.env.APP_ENV);
 
 const output_path = isDev
-  ? path.resolve(__dirname, "dist")
-  : path.resolve(__dirname, "public");
+  ? path.resolve(__dirname, "build")
+  : path.resolve(__dirname, "dist");
 
 const extractCSS = new ExtractTextPlugin({
   filename: "css/[name].css"
@@ -26,12 +24,13 @@ module.exports = {
 
   output: {
     path: output_path,
-    publicPath: "dist",
+    //publicPath: "dist",
     filename: "js/[name].js"
   },
 
   devtool: isDev ? "cheap-inline-module-source-map" : "source-map",
 
+  // TODO: delete devserver after BrowserSync will be fully tested
   devServer: {
     contentBase: "./dist",
     watchContentBase: true
@@ -41,7 +40,7 @@ module.exports = {
     rules: [
       {
         test: /\.jsx?$/,
-        exclude: /(node_modules|dist)/,
+        exclude: /(node_modules|dist|build)/,
         use: {
           loader: "babel-loader",
           query: {
