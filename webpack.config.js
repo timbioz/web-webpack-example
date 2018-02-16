@@ -86,5 +86,11 @@ module.exports = {
         extensions: [".js", ".jsx", ".json", ".css", ".scss"]
     },
 
-    plugins: [new CleanWebpackPlugin(["build", "dist"]), extractCSS]
+    plugins: [
+      new CleanWebpackPlugin(["build", "dist"]),
+      extractCSS,
+      new CopyWebpackPlugin([{
+        from: "src/views"
+      }])
+    ]
 };
