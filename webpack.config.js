@@ -2,6 +2,7 @@ require("dotenv").config();
 const path = require("path");
 const webpack = require("webpack");
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 // region Options
@@ -17,14 +18,6 @@ const output_path = isDev
 const extractCSS = new ExtractTextPlugin({
     filename: "css/[name].css"
 });
-
-// the path(s) that should be cleaned
-let pathsToClean = ["build", "dist"];
-
-// the clean options to use
-let cleanOptions = {
-    verbose: true
-};
 
 // endregion
 
@@ -93,5 +86,5 @@ module.exports = {
         extensions: [".js", ".jsx", ".json", ".css", ".scss"]
     },
 
-    plugins: [new CleanWebpackPlugin(pathsToClean, cleanOptions), extractCSS]
+    plugins: [new CleanWebpackPlugin(["build", "dist"]), extractCSS]
 };
