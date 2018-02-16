@@ -1,6 +1,6 @@
 import "../css/index.css"
 
-let id = 13356665111;
+let id = 1102;
 
 const url = `http://localhost:3000/api/messagesww/${id}`;
 
