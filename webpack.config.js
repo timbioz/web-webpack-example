@@ -1,8 +1,8 @@
 require("dotenv").config();
 const path = require("path");
 const webpack = require("webpack");
-const CleanWebpackPlugin = require('clean-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+const CleanWebpackPlugin = require("clean-webpack-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 // region Options
@@ -15,7 +15,7 @@ const output_path = isDev
     ? path.resolve(__dirname, "build")
     : path.resolve(__dirname, "dist");
 
-const extractCSS = new ExtractTextPlugin({
+const extractCss = new ExtractTextPlugin({
     filename: "css/[name].css"
 });
 
@@ -56,9 +56,24 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                use: extractCSS.extract({
+                use: extractCss.extract({
                     fallback: "style-loader",
                     use: "css-loader"
+                })
+            },
+            {
+                test: /\.scss$/,
+                use: extractCss.extract({
+                    use: [
+                        {
+                            loader: "css-loader"
+                        },
+                        {
+                            loader: "sass-loader"
+                        }
+                    ],
+                    // use style-loader in development
+                    fallback: "style-loader"
                 })
             }
         ]
@@ -87,10 +102,12 @@ module.exports = {
     },
 
     plugins: [
-      new CleanWebpackPlugin(["build", "dist"]),
-      extractCSS,
-      new CopyWebpackPlugin([{
-        from: "src/views"
-      }])
+        new CleanWebpackPlugin(["build", "dist"]),
+        extractCss,
+        new CopyWebpackPlugin([
+            {
+                from: "src/views"
+            }
+        ])
     ]
 };

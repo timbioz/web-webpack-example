@@ -1,4 +1,5 @@
 import "../css/index.css"
+import "../scss/index.scss"
 
 let id = 1102;
 
