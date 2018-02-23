@@ -3,16 +3,26 @@ var browserSync = require("browser-sync").create();
 var reload = browserSync.reload;
 var webpack = require("webpack-stream");
 
+// TODO: Migrate to Gulp 4 version
+
+gulp.task("default", ["browser-sync-dev"]);
+
 // Static server
 gulp.task("browser-sync-dev", function() {
     browserSync.init({
         server: {
-            baseDir: "./build",
-            notify: false
-        }
+            baseDir: "./build"
+        },
+        reloadDelay: 2000,
+        debounceDelay: 2000,
+        notify: true
     });
 
     gulp.watch("build/**/*").on("change", reload);
+});
+
+gulp.task("bs-reload", function() {
+    return browserSync.reload("./build/**/*");
 });
 
 gulp.task("webpack", function() {
@@ -22,8 +32,6 @@ gulp.task("webpack", function() {
         .pipe(gulp.dest("build/"));
 });
 
-
 gulp.task("webpack-watch", function() {
     gulp.watch("src/**/*", ["webpack"]);
 });
-
