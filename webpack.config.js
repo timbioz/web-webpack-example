@@ -31,7 +31,7 @@ module.exports = {
 
     output: {
         path: output_path,
-        //publicPath: "dist",
+        publicPath: "dist",
         filename: "js/[name].js"
     },
 
