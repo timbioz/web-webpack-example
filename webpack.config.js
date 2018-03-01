@@ -12,9 +12,9 @@ const isDev = process.env.APP_ENV === "development";
 
 console.log(process.env.APP_ENV);
 
-const output_path = isDev
-    ? path.resolve(__dirname, "build")
-    : path.resolve(__dirname, "dist");
+const output_path = isDev ?
+    path.resolve(__dirname, "build") :
+    path.resolve(__dirname, "dist");
 
 const extractCss = new ExtractTextPlugin({
     filename: "css/[name].css"
@@ -31,7 +31,7 @@ module.exports = {
 
     output: {
         path: output_path,
-        publicPath: "dist",
+        //publicPath: "build",
         filename: "js/[name].js"
     },
 
@@ -39,13 +39,12 @@ module.exports = {
 
     // TODO: delete devserver after BrowserSync will be fully tested
     devServer: {
-        contentBase: "./dist",
+        contentBase: "./build",
         watchContentBase: true
     },
 
     module: {
-        rules: [
-            {
+        rules: [{
                 test: /\.jsx?$/,
                 exclude: /(node_modules|dist|build)/,
                 use: {
@@ -65,8 +64,7 @@ module.exports = {
             {
                 test: /\.scss$/,
                 use: extractCss.extract({
-                    use: [
-                        {
+                    use: [{
                             loader: "css-loader"
                         },
                         {
@@ -76,6 +74,10 @@ module.exports = {
                     // use style-loader in development
                     fallback: "style-loader"
                 })
+            },
+            {
+                test: /\.tsx?$/,
+                loader: 'awesome-typescript-loader'
             }
         ]
     },
@@ -99,7 +101,7 @@ module.exports = {
                 "./node_modules/popper.js/dist/popper.js"
             )
         },
-        extensions: [".js", ".jsx", ".json", ".css", ".scss"]
+        extensions: [".js", ".jsx", ".ts", ".tsx", ".json", ".css", ".scss"]
     },
 
     plugins: [

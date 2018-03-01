@@ -3,7 +3,11 @@ import "bootstrap/dist/css/bootstrap"
 import "../css/index.css"
 import "../scss/index.scss"
 
+import {render} from "../ts/index"
+
 let id = 2202258;
+
+render();
 
 const url = `http://localhost:3000/api/messagesww/${id}`;
 
