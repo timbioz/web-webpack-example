@@ -1,7 +1,9 @@
+import "bootstrap/dist/css/bootstrap"
+
 import "../css/index.css"
 import "../scss/index.scss"
 
-let id = 1102;
+let id = 2202258;
 
 const url = `http://localhost:3000/api/messagesww/${id}`;
 

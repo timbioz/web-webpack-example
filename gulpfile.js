@@ -13,9 +13,7 @@ gulp.task("browser-sync-dev", function() {
         server: {
             baseDir: "./build"
         },
-        reloadDelay: 2000,
-        debounceDelay: 2000,
-        notify: true
+        notify: false
     });
 
     gulp.watch("build/**/*").on("change", reload);

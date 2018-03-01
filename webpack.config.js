@@ -4,6 +4,7 @@ const webpack = require("webpack");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 // region Options
 
@@ -104,10 +105,19 @@ module.exports = {
     plugins: [
         new CleanWebpackPlugin(["build", "dist"]),
         extractCss,
-        new CopyWebpackPlugin([
-            {
-                from: "src/views"
+        // new CopyWebpackPlugin([
+        //     {
+        //         from: "src/views"
+        //     }
+        // ]),
+        new HtmlWebpackPlugin({
+            title: "My App timbioz",
+            filename: "index.html",
+            template: "src/views/webpack_templates/index.html",
+            hash: true,
+            minify: {
+                html5: true
             }
-        ])
+        })
     ]
 };
