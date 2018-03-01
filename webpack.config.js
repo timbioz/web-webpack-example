@@ -12,9 +12,9 @@ const isDev = process.env.APP_ENV === "development";
 
 console.log(process.env.APP_ENV);
 
-const output_path = isDev ?
-    path.resolve(__dirname, "build") :
-    path.resolve(__dirname, "dist");
+const output_path = isDev
+    ? path.resolve(__dirname, "build")
+    : path.resolve(__dirname, "dist");
 
 const extractCss = new ExtractTextPlugin({
     filename: "css/[name].css"
@@ -31,20 +31,20 @@ module.exports = {
 
     output: {
         path: output_path,
-        //publicPath: "build",
+        publicPath: "/",
         filename: "js/[name].js"
     },
 
     devtool: isDev ? "cheap-inline-module-source-map" : "source-map",
 
-    // TODO: delete devserver after BrowserSync will be fully tested
     devServer: {
         contentBase: "./build",
         watchContentBase: true
     },
 
     module: {
-        rules: [{
+        rules: [
+            {
                 test: /\.jsx?$/,
                 exclude: /(node_modules|dist|build)/,
                 use: {
@@ -64,20 +64,32 @@ module.exports = {
             {
                 test: /\.scss$/,
                 use: extractCss.extract({
-                    use: [{
+                    use: [
+                        {
                             loader: "css-loader"
                         },
                         {
                             loader: "sass-loader"
                         }
                     ],
-                    // use style-loader in development
                     fallback: "style-loader"
                 })
             },
             {
                 test: /\.tsx?$/,
-                loader: 'awesome-typescript-loader'
+                loader: "awesome-typescript-loader"
+            },
+            {
+                test: /\.(pdf|jpg|png|gif|svg|ico)$/,
+                use: [
+                    {
+                        loader: "url-loader",
+                        options: { 
+                            limit: 10000,
+                            name: 'images/[hash]-[name].[ext]'
+                        } 
+                    }
+                ]
             }
         ]
     },

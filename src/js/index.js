@@ -5,6 +5,11 @@ import "../scss/index.scss"
 
 import {render} from "../ts/index"
 
+import "../images/logo.png";
+import "../images/car1.jpg";
+import "../images/car2.jpg";
+import "../images/car3.jpg";
+
 let id = 2202258;
 
 render();
