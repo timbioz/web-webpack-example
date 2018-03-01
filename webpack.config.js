@@ -80,7 +80,7 @@ module.exports = {
                 loader: "awesome-typescript-loader"
             },
             {
-                test: /\.(pdf|jpg|png|gif|svg|ico)$/,
+                test: /\.(pdf|jpe?g|png|gif|svg|ico)$/,
                 use: [
                     {
                         loader: "url-loader",
