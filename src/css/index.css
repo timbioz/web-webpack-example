@@ -1,4 +1,7 @@
 p {
     color: red;
     background-color: #005700;
+    display: flex;
 }
+
+.foo { flex: 1; }

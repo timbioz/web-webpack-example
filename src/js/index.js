@@ -1,4 +1,4 @@
-import "bootstrap/dist/css/bootstrap"
+//import "bootstrap/dist/css/bootstrap"
 
 import "../css/index.css"
 import "../scss/index.scss"

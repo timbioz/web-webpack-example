@@ -3,5 +3,7 @@
 h1 {
     color: $main-color;
     background-color: #ff3300;
+    display: flex;
 }
 
+.boo { flex: 1; }
