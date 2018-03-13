@@ -3,7 +3,7 @@ const path = require("path");
 const webpack = require("webpack");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 // region Options
@@ -16,14 +16,12 @@ const output_path = isDev
     ? path.resolve(__dirname, "build")
     : path.resolve(__dirname, "dist");
 
-const extractCss = new ExtractTextPlugin({
-    filename: "css/[name].css"
-});
-
 // endregion
 
 module.exports = {
     context: path.resolve(__dirname),
+
+    mode: isDev ? "development" : "production",
 
     entry: {
         main: "./src/js/index"
@@ -34,8 +32,8 @@ module.exports = {
         publicPath: "/",
         filename: "js/[name].js"
     },
-
-    devtool: isDev ? "cheap-inline-module-source-map" : "source-map",
+    
+    devtool: isDev ? "inline-source-map" : "source-map",
 
     devServer: {
         contentBase: "./build",
@@ -48,46 +46,42 @@ module.exports = {
                 test: /\.jsx?$/,
                 exclude: /(node_modules|dist|build)/,
                 use: {
-                    loader: "babel-loader",
-                    query: {
-                        presets: ["env"]
-                    }
+                    loader: "babel-loader"
                 }
             },
             {
-                test: /\.css$/,
-                use: extractCss.extract({
-                    fallback: "style-loader",
-                    use: "css-loader"
-                })
-            },
-            {
-                test: /\.scss$/,
-                use: extractCss.extract({
-                    use: [
-                        {
-                            loader: "css-loader"
-                        },
-                        {
-                            loader: "sass-loader"
+                test: [/\.scss$/, /\.css$/],
+                use: [
+                    {
+                        loader: MiniCssExtractPlugin.loader
+                    },
+                    {
+                        loader: "css-loader",
+                        options: {
+                            minimize: isDev ? false : true
                         }
-                    ],
-                    fallback: "style-loader"
-                })
+                    },
+                    {
+                        loader: "sass-loader"
+                    }
+                ]
             },
             {
                 test: /\.tsx?$/,
-                loader: "awesome-typescript-loader"
+                loader: "ts-loader",
+                options: {
+                    transpileOnly: true
+                  }
             },
             {
                 test: /\.(pdf|jpe?g|png|gif|svg|ico)$/,
                 use: [
                     {
                         loader: "url-loader",
-                        options: { 
+                        options: {
                             limit: 10000,
-                            name: 'images/[hash]-[name].[ext]'
-                        } 
+                            name: "images/[hash]-[name].[ext]"
+                        }
                     }
                 ]
             }
@@ -118,12 +112,9 @@ module.exports = {
 
     plugins: [
         new CleanWebpackPlugin(["build", "dist"]),
-        extractCss,
-        // new CopyWebpackPlugin([
-        //     {
-        //         from: "src/views"
-        //     }
-        // ]),
+        new MiniCssExtractPlugin({
+            filename: "css/[name].css"
+        }),
         new HtmlWebpackPlugin({
             title: "My App timbioz",
             filename: "index.html",
