@@ -11,10 +11,10 @@ function reload(done) {
 function bsync(done) {
   server.init({
     server: {
-      baseDir: './build',
-      open: false,
-      notify: false
-    }
+      baseDir: './build'
+    },
+    open: false,
+    notify: false
   });
   done();
 };
