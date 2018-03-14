@@ -1,5 +1,6 @@
 require("dotenv").config();
 const path = require("path");
+const chalk = require('chalk');
 const webpack = require("webpack");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
@@ -9,8 +10,9 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 // region Options
 
 const isDev = process.env.APP_ENV === "development";
+const isClean = process.env.CLEAN_FOLDERS === "true" || false;
 
-console.log(process.env.APP_ENV);
+console.log(chalk.red(process.env.APP_ENV));
 
 const output_path = isDev
     ? path.resolve(__dirname, "build")
@@ -55,9 +57,6 @@ module.exports = {
                     {
                         loader: MiniCssExtractPlugin.loader
                     },
-                    // {
-                    //     loader: "style-loader"
-                    // },
                     {
                         loader: "css-loader",
                         options: {
@@ -118,7 +117,6 @@ module.exports = {
     },
 
     plugins: [
-        new CleanWebpackPlugin(["build", "dist"]),
         new MiniCssExtractPlugin({
             filename: "css/[name].css"
         }),
@@ -133,3 +131,10 @@ module.exports = {
         })
     ]
 };
+
+if (isClean) {
+    console.log(chalk.green("Clean webpack plugin added(pushed)"));
+    module.exports.plugins.push(
+        new CleanWebpackPlugin(["build", "dist"])
+);
+}
