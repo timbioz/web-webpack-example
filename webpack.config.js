@@ -80,14 +80,34 @@ module.exports = {
                   }
             },
             {
-                test: /\.(pdf|jpe?g|png|gif|svg|ico)$/,
+                test: /\.(pdf|jpe?g|png|gif|ico)$/,
                 use: [
                     {
                         loader: "url-loader",
                         options: {
-                            limit: 10000,
+                            limit: 8000,
                             name: "images/[hash]-[name].[ext]"
                         }
+                    },
+                    {
+                        loader: "image-webpack-loader",
+                        options: {}
+                    }
+                ]
+            },
+            {
+                test: /\.svg$/,
+                use: [
+                    {
+                        loader: "url-loader",
+                        options: {
+                            limit: 8000,
+                            name: "images/[hash]-[name].[ext]"
+                        }
+                    },
+                    {
+                        loader: "image-webpack-loader",
+                        options: {}
                     }
                 ]
             }

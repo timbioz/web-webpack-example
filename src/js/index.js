@@ -10,6 +10,8 @@ import "../images/car1.jpg";
 import "../images/car2.jpg";
 import "../images/car3.jpg";
 
+import "../images/test.svg";
+
 let id = 2202258;
 
 render();
