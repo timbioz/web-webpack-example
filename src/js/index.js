@@ -3,6 +3,7 @@
 import "../css/index.css"
 import "../scss/index.scss"
 
+
 import {render} from "../ts/index"
 
 import "../images/logo.png";

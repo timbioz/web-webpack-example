@@ -1,7 +1,27 @@
+/* indie-flower-regular - latin */
+@font-face {
+    font-family: 'Indie Flower';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/IndieFlower') format('truetype')
+  }
+
+  @font-face {
+    font-family: 'lobster';
+    src: url('../fonts/lobster.woff2') format('woff2')
+  }
+
 p {
     color: red;
+    font-family: "Indie Flower";
     background-color: #005700;
     display: flex;
+}
+
+p.woff-test {
+    font-family: "lobster";
+    background-color: aliceblue;
+    color: black;
 }
 
 .foo { flex: 1; }

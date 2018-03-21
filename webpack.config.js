@@ -1,6 +1,6 @@
 require("dotenv").config();
 const path = require("path");
-const chalk = require('chalk');
+const chalk = require("chalk");
 const webpack = require("webpack");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
@@ -34,7 +34,7 @@ module.exports = {
         publicPath: "/",
         filename: "js/[name].js"
     },
-    
+
     devtool: isDev ? "inline-source-map" : "source-map",
 
     devServer: {
@@ -77,7 +77,7 @@ module.exports = {
                 loader: "ts-loader",
                 options: {
                     transpileOnly: true
-                  }
+                }
             },
             {
                 test: /\.(pdf|jpe?g|png|gif|ico)$/,
@@ -110,6 +110,30 @@ module.exports = {
                         options: {}
                     }
                 ]
+            },
+            {
+                test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
+                use: [
+                    {
+                        loader: "url-loader",
+                        options: {
+                            limit: 50000,
+                            mimetype: "application/font-woff",
+                            name: "fonts/[name].[ext]"
+                        }
+                    }
+                ]
+            },
+            {
+                test: /\.(ttf|eot)$/,
+                use: [
+                    {
+                        loader: "file-loader",
+                        options: {
+                            name: "fonts/[name].[ext]"
+                        }
+                    }
+                ]
             }
         ]
     },
@@ -133,7 +157,7 @@ module.exports = {
                 "./node_modules/popper.js/dist/popper.js"
             )
         },
-        extensions: [".js", ".jsx", ".ts", ".tsx", ".json", ".css", ".scss"]
+        extensions: [".js", ".jsx", ".ts", ".tsx", ".json", ".css", ".scss", ".ttf", ".eot", ".woff", ".woff2"]
     },
 
     plugins: [
@@ -154,7 +178,5 @@ module.exports = {
 
 if (isClean) {
     console.log(chalk.green("Clean webpack plugin added(pushed)"));
-    module.exports.plugins.push(
-        new CleanWebpackPlugin(["build", "dist"])
-);
+    module.exports.plugins.push(new CleanWebpackPlugin(["build", "dist"]));
 }
