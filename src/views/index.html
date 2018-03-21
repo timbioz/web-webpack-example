@@ -10,12 +10,17 @@
     <h1>222For dist folder</h1>
     <p>Пример 44 css</p>
     <button id="timbioz">Super</button>
-    <img src="${require('../../images/car3.jpg')}" alt="">
-    <img src="${require('../../images/logo.png')}" alt="">
+    <img src="${require('../images/car3.jpg')}" alt="">
 
-    <img src="${require('../../images/test.svg')}" alt="">
+    <img src="${require('../images/logo.png')}" alt="">
+
+    <img class="svg-test" src="${require('../images/test.svg')}" alt="">
 
     ${require('html-loader!./partial/partial.html')}
+
+    <div class="css-image-test"></div>
+    <div class="css-image-test2"></div>
+
     ${require('html-loader!./partial/partial2.html')}
 </body>
 </html>

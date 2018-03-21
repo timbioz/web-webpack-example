@@ -143,7 +143,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             title: "My App timbioz",
             filename: "index.html",
-            template: "src/views/webpack_templates/index.html",
+            template: "src/views/index.html",
             hash: true,
             minify: {
                 html5: true

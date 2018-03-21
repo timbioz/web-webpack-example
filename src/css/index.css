@@ -5,3 +5,9 @@ p {
 }
 
 .foo { flex: 1; }
+
+.css-image-test2 {
+    height: 200px;
+    width: 500px;
+    background: url("../images/car2.jpg");
+}
