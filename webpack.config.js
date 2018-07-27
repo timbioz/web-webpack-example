@@ -68,7 +68,12 @@ module.exports = {
                         loader: "postcss-loader"
                     },
                     {
-                        loader: "sass-loader"
+                        loader: "sass-loader",
+                        options: {
+                            "includePaths": [
+                                require('path').resolve(__dirname, 'node_modules')
+                            ]
+                        }
                     }
                 ]
             },
