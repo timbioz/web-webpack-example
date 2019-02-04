@@ -60,7 +60,6 @@ module.exports = {
                     {
                         loader: "css-loader",
                         options: {
-                            minimize: isDev ? false : true,
                             importLoaders: 2
                         }
                     },
