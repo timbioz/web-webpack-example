@@ -1,13 +1,12 @@
-import gulp from 'gulp';
-import browserSync from 'browser-sync';
+let gulp = require('gulp');
+let browserSync = require('browser-sync');
 
 const server = browserSync.create();
 
 function reload(done) {
   server.reload();
   done();
-};
-
+}
 function bsync(done) {
   server.init({
     server: {
@@ -17,8 +16,9 @@ function bsync(done) {
     notify: false
   });
   done();
-};
+}
+let watch = () => gulp.watch("build/**/*", reload);
 
-const watch = () => gulp.watch("build/**/*", reload);
+let serve = gulp.series(bsync, watch);
 
-export const serve = gulp.series(bsync, watch);
+exports.serve = serve;
